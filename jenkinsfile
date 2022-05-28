@@ -1,0 +1,27 @@
+pipeline{
+    agent {label 'worker'}
+    options{
+        buildDiscarder(logRotator(daysToKeepStr: '7'))
+        disableConcurrentBuilds()
+    }
+
+    parameters{
+        string(name: 'BRANCH' , defaultValue: 'main')
+        choice(name: 'OPERATIONS', choices: ['A','B','C'])
+    }
+        stages{
+            stage('Unit Test'){
+            steps{
+                sh " echo hello C32 "
+                sh " sleep 10 "
+                }
+                }
+                stage('Snow Test'){
+                    steps{
+                        sh " echo Snow  test for C32"
+                        sh " sleep 20 "
+                        
+                    }
+                }
+            }
+    }
